@@ -12,7 +12,7 @@ const Directory = props => {
                         backgroundImage: `url(${Seedlings})`
                     }}>
                         <a className="link">
-                            Browse Seedlings
+                            Browse Seeds
                         </a>
                 </div>
                 <div 
