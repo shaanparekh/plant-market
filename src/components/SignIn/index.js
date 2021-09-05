@@ -1,15 +1,33 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import './styles.scss'
 import Button from '../forms/Button';
-import { signInWithGoogle } from '../../firebase/utils';
+import { signInWithGoogle } from '../../redux/User/user.actions'; 
+import { useDispatch, useSelector } from 'react-redux';
 
-class SignIn extends Component {
+const mapState = ({user}) => ({
+    signInSuccess: user.signInSuccess
+});
 
-    handleSubmit = async e => {
+const SignIn = props => {
+
+    const {signInSuccess} = useSelector(mapState);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(signInSuccess){
+            props.history.push('/');
+        }
+    }, [signInSuccess])
+
+    const handleSubmit = e => {
         e.preventDefault();
     }
 
-    render(){
+    const handleGoogleSignIn = () => {
+        dispatch(signInWithGoogle());
+    }
+
         return(
         <div className="signin">
             <div className="wrap">
@@ -17,10 +35,10 @@ class SignIn extends Component {
                     Login
                 </h2>
                 <div className = "formWrap">
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className="socialSignIn">
                             <div className="row">
-                                <Button onClick = {signInWithGoogle}>
+                                <Button onClick = {handleGoogleSignIn}>
                                     Sign In with Google
                                 </Button>
                             </div>
@@ -31,6 +49,5 @@ class SignIn extends Component {
         </div>
     );
     }
-}
 
-export default SignIn;
+export default withRouter(SignIn);
