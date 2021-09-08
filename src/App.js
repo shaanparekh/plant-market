@@ -8,11 +8,15 @@ import WithAuth from './hoc/withAuth';
 
 import MainLayout from './layouts/MainLayout';
 import HomepageLayout from './layouts/HomepageLayout';
+import AdminLayout from './layouts/AdminLayout';
+import DashboardLayout from './layouts/DashboardLayout';
 
 import Homepage from './pages/Homepage';
-import Registration from './pages/Registration';
+import Search from './pages/Search';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Sell from './pages/Sell';
+import ProductDetails from './pages/ProductDetails';
 import './default.scss';
 
 const App = props => {
@@ -49,6 +53,21 @@ const App = props => {
               <Homepage />
             </HomepageLayout>
           )} />
+          <Route exact path="/search" render={() => (
+          <MainLayout>
+            <Search />
+          </MainLayout>
+        )} />
+          <Route path="/search/:filterType" render={() => (
+            <MainLayout>
+              <Search />
+            </MainLayout>
+          )} />
+          <Route path="/product/:productID" render={() => (
+          <MainLayout>
+            <ProductDetails />
+          </MainLayout>
+        )} />
           <Route path ="/login" 
             render={() => (
               <MainLayout>
@@ -58,11 +77,19 @@ const App = props => {
             <Route path ="/dashboard" 
             render={() => (
               <WithAuth>
-                <MainLayout>
+                <DashboardLayout>
                   <Dashboard />
-                </MainLayout>
+                </DashboardLayout>
               </WithAuth>
             )} />
+            <Route path="/sell" 
+            render={() => (
+            <WithAuth>
+              <AdminLayout>
+                <Sell />
+              </AdminLayout>
+            </WithAuth>
+        )} />
         </Switch>
       </div>
     );

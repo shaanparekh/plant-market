@@ -1,6 +1,11 @@
 import userTypes from "./user.types";
 import { auth, GoogleProvider } from "../../firebase/utils";
 
+export const signInSuccess = user => ({
+    type: userTypes.SIGN_IN_SUCCESS,
+    payload: user
+});
+
 export const setCurrentUser = user =>({
     type: userTypes.SET_CURRENT_USER,
     payload: user

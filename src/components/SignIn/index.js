@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './styles.scss'
 import Button from '../forms/Button';
 import { signInWithGoogle } from '../../redux/User/user.actions'; 
@@ -13,10 +13,11 @@ const SignIn = props => {
 
     const {signInSuccess} = useSelector(mapState);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         if(signInSuccess){
-            props.history.push('/');
+            history.push('/');
         }
     }, [signInSuccess])
 
@@ -50,4 +51,4 @@ const SignIn = props => {
     );
     }
 
-export default withRouter(SignIn);
+export default SignIn;
