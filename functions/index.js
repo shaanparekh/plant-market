@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const stripe = require('stripe')('sk_test_51JXzSfCVPYtqcCtcXzF5bYCmSFh2YRUZzfrCKueKIcOe5yIcX4AdilaTUzXKWFwJ9KeBb3jILpUigtueaK7Dp9TN00L5DvUXYw');
+const stripe = require('stripe')('');
 
 const app = express();
 
