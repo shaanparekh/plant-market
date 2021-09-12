@@ -1,17 +1,19 @@
 import { useSelector } from 'react-redux';
-import './styles.scss';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/utils';
+import { selectCartItemsCount } from './../../redux/Cart/cart.selectors';
+import './styles.scss';
 
 import Logo from './../../assets/logo.png';
 
-const mapState = ({user}) => ({
-    currentUser: user.currentUser
+const mapState = (state) => ({
+    currentUser: state.user.currentUser,
+    totalNumCartItems: selectCartItemsCount(state)
 });
 
 const Header = props => {
 
-    const { currentUser } = useSelector(mapState);
+    const { currentUser, totalNumCartItems } = useSelector(mapState);
 
     return(
         <header className="header">
@@ -37,36 +39,42 @@ const Header = props => {
           </ul>
         </nav>
 
-                <div className="callToActions">
-                    {currentUser && (
-                        <ul>
-                            <li>
-                            <Link to="/dashboard">
-                                My Account
-                            </Link>
-                            </li>
-                            <li>
-                            <Link to="/sell">
-                                Sell Products
-                            </Link>
-                            </li>
-                            <li>
-                                <span onClick = {() => auth.signOut()}>
-                                    Logout
-                                </span>
-                            </li>
-                        </ul>
-                    )}
+        <div className="callToActions">
+        <ul>
+            <li>
+            <Link to="/cart">
+                Your Cart ({totalNumCartItems})
+              </Link>
+            </li>
 
-                    {!currentUser && (
-                    <ul>
-                        <li>
-                            <Link to="/login">
-                                Login
-                            </Link>
-                        </li>
-                    </ul>
-                    )}
+            {currentUser && [
+                <li>
+                    <Link to="/dashboard">
+                        My Account
+                    </Link>
+                </li>,
+                <li>
+                    <Link to="/sell">
+                        Sell Products
+                    </Link>
+                </li>,
+                <li>
+                    <span onClick = {() => auth.signOut()}>
+                        Logout
+                    </span>
+                </li>
+            ]}
+
+            {!currentUser && [
+                <ul>
+                    <li>
+                        <Link to="/login">
+                            Login
+                        </Link>
+                    </li>
+                </ul>
+                ]}
+                </ul>
                 </div>
             </div>
         </header>

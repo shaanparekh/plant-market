@@ -17,6 +17,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Sell from './pages/Sell';
 import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
+import Payment from './pages/Payment';
 import './default.scss';
 
 const App = props => {
@@ -67,6 +69,18 @@ const App = props => {
           <MainLayout>
             <ProductDetails />
           </MainLayout>
+        )} />
+         <Route path="/cart" render={() => (
+          <MainLayout>
+            <Cart />
+          </MainLayout>
+        )} />
+        <Route path="/payment" render={() => (
+          <WithAuth>
+            <MainLayout>
+              <Payment />
+            </MainLayout>
+          </WithAuth>
         )} />
           <Route path ="/login" 
             render={() => (

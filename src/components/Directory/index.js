@@ -1,5 +1,6 @@
 import Seedlings from './../../assets/seedlings.jpg'
 import Plants from './../../assets/plants.jpg'
+import { Link } from 'react-router-dom';
 import './styles.scss'
 
 const Directory = props => {
@@ -11,18 +12,18 @@ const Directory = props => {
                     style ={{
                         backgroundImage: `url(${Seedlings})`
                     }}>
-                        <a className="link">
+                        <Link className="link" to="/search/seeds">
                             Browse Seeds
-                        </a>
+                        </Link>
                 </div>
                 <div 
                     className="item"
                     style ={{
                         backgroundImage: `url(${Plants})`
                 }}>    
-                    <a className="link">
+                    <Link className="link" to="/search/plants">
                         Browse Plants
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

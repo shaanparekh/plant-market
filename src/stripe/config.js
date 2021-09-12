@@ -1,0 +1,1 @@
+export const publishableKey = 'pk_test_51JXzSfCVPYtqcCtc2QQox4SSZuaF39XyLFBq6X16c1ujWU806YpPgMMOevTlbQ1kva7xzJk7bmBgZ07gAlF1uTTg00dUv03QoE';
